@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#064e3b">
+  <meta name="description" content="Sovan Kapri — English Communication Trainer, Founder of English Spur, and Retail Management Specialist.">
+  <title>Sovan Kapri | Communication Trainer & Retail Expert</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- PDF Generation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    :root {
+      --green: #059669;
+      --green-dark: #064e3b;
+      --green-deep: #022c22;
+      --mint: #ecfdf5;
+      --paper: #f7f9f8;
+      --ink: #172b25;
+      --muted: #61716b;
+      --line: #e3ebe6;
+      --content: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    ::selection { background: #a7f3d0; color: var(--green-deep); }
+    a { -webkit-tap-highlight-color: transparent; }
+    button, input, textarea, select { font: inherit; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 3px solid #6ee7b7;
+      outline-offset: 3px;
+    }
+
+    .container { width: min(var(--content), calc(100% - 48px)); margin-inline: auto; }
+    .section { padding-block: 88px; }
+    .section-head { max-width: 720px; margin-bottom: 38px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #047857; background: #e8f8ef; border: 1px solid #d3f0df;
+      border-radius: 999px; padding: 6px 11px;
+      font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    }
+    .section-title {
+      margin: 15px 0 0; font-size: clamp(29px, 3.4vw, 43px);
+      line-height: 1.18; letter-spacing: -.045em; font-weight: 750; color: #10251e;
+    }
+    .section-copy { margin-top: 15px; max-width: 680px; color: var(--muted); font-size: 14px; line-height: 1.9; }
+    .accent { color: #B88718; }
+    .button-primary { background: linear-gradient(135deg, #065f46, #064e3b); }
+    .button-primary:hover { background: #043f30; }
+    .navbar {
+      background: rgba(255,255,255,.94); border-bottom: 1px solid rgba(16,78,59,.09);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-link { color: #52635c; font-size: 12px; font-weight: 650; transition: color .2s; }
+    .nav-link:hover, .nav-link:focus-visible { color: var(--green); }
+    .button {
+      display: inline-flex; justify-content: center; align-items: center; gap: 9px;
+      min-height: 46px; padding: 11px 17px; border-radius: 11px;
+      font-size: 12px; font-weight: 700; text-decoration: none;
+      transition: transform .2s, background .2s, box-shadow .2s; cursor: pointer;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: white; background: #087f5b; box-shadow: 0 5px 14px rgba(8,127,91,.15); }
+    .button-primary:hover { background: #066b4c; box-shadow: 0 8px 20px rgba(8,127,91,.2); }
+    .button-outline { color: #086748; background: white; border: 1px solid #d7e8de; }
+    .button-outline:hover { background: #f0fbf5; }
+    
+    /* Reduced Hero Top Padding */
+    .hero {
+      padding: 100px 0 60px;
+      background: radial-gradient(ellipse at 85% 20%, rgba(16,185,129,.10), transparent 32%),
+                  linear-gradient(135deg, #fbfcfb 0%, #effaf3 100%);
+    }
+    .hero-grid { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(310px,.75fr); align-items: center; gap: 60px; }
+    .hero-title { margin: 18px 0 0; font-size: clamp(42px, 5.7vw, 66px); line-height: 1.04; letter-spacing: -.065em; font-weight: 800; color: #10251e; }
+    .hero-role { margin-top: 20px; font-size: clamp(19px, 2.2vw, 25px); line-height: 1.45; font-weight: 650; letter-spacing: -.025em; color: #34483f; }
+    .hero-copy { max-width: 620px; margin-top: 18px; color: #5c6d65; font-size: 14px; line-height: 1.95; }
+    
+    /* Image Frame Adjustments */
+    .profile-frame { padding: 8px; border-radius: 27px; background: linear-gradient(145deg,#10b981,#d1fae5 50%,#065f46); box-shadow: 0 18px 45px rgba(6,78,59,.13); }
+    .profile-frame img { display:block; width:100%; height: 410px; object-fit:cover; object-position:center top; border-radius:20px; background:#d1fae5; }
+    .profile-fallback { display:none; height:410px; border-radius:20px; background:#d1fae5; color:#065f46; align-items:center; justify-content:center; flex-direction:column; }
+    
+    /* Reduced negative margin to close the gap */
+    .profile-note {
+      position: relative; margin: -15px 18px 0; padding: 14px 16px; z-index: 1;
+      border: 1px solid #e6eee9; border-radius: 15px; background: rgba(255,255,255,.97);
+      box-shadow: 0 8px 22px rgba(15,23,42,.07);
+    }
+    
+    .social-link {
+      width: 39px; height: 39px; display:inline-flex; align-items:center; justify-content:center;
+      color:#40534a; background:#fff; border:1px solid var(--line); border-radius:11px; transition:.2s;
+    }
+    .social-link:hover { color:#fff; background:#087f5b; border-color:#087f5b; transform:translateY(-2px); }
+    .card {
+      height: 100%; padding: 25px; background: #fff; border: 1px solid var(--line);
+      border-radius: 18px; box-shadow: 0 3px 14px rgba(20,45,34,.025);
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+    .card:hover { border-color:#c4e8d3; box-shadow:0 12px 28px rgba(20,45,34,.06); transform:translateY(-3px); }
+    .icon-box {
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      width:45px; height:45px; border-radius:13px; color:#087f5b; background:#eaf8ef;
+    }
+    .stat-number { font-size: 28px; line-height:1.15; font-weight:800; letter-spacing:-.04em; color:#10251e; }
+    .dark-panel {
+      color:#fff; border-radius:22px; background:
+      radial-gradient(circle at 95% 0%,rgba(52,211,153,.12),transparent 34%),
+      linear-gradient(135deg,#022c22,#064e3b);
+    }
+    .timeline { position:relative; margin-left:7px; padding-left:25px; border-left:1px solid #cde8d7; }
+    .timeline-item { position:relative; padding:0 0 25px; }
+    .timeline-item:last-child { padding-bottom:0; }
+    .timeline-item::before {
+      position:absolute; content:""; left:-31px; top:6px; width:11px; height:11px;
+      border-radius:50%; background:#059669; box-shadow:0 0 0 4px #e5f7ec;
+    }
+    .tag { display:inline-flex; padding:5px 8px; border-radius:7px; background:#f1f5f3; color:#52635c; font-size:10px; font-weight:700; }
+    .award-tag { display:inline-flex; align-items:center; gap:6px; padding:6px 9px; border-radius:8px; background:#fff6df; color:#8a5a05; font-size:10px; font-weight:750; }
+    .skill-chip { display:inline-flex; align-items:center; gap:7px; padding:9px 11px; border:1px solid #e0e9e3; border-radius:10px; background:white; color:#40534a; font-size:11px; font-weight:650; }
+    .skill-chip i { color:#07815b; }
+    
+    /* Gallery Image Grid */
+    .gallery-card { overflow:hidden; padding:9px; border:1px solid var(--line); border-radius:18px; background:#fff; transition: transform .2s, box-shadow .2s; }
+    .gallery-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .gallery-image { width:100%; height:220px; object-fit:cover; border-radius:12px; cursor: zoom-in; background:#f3f4f6; }
+    
+    .form-input {
+      width:100%; padding:12px 13px; border:1px solid #dce6df; border-radius:10px;
+      background:#fff; color:#172b25; font-size:13px; outline:none; transition:border-color .2s,box-shadow .2s;
+    }
+    .form-input:focus { border-color:#10b981; box-shadow:0 0 0 3px rgba(16,185,129,.12); }
+    .reveal { opacity:0; transform:translateY(14px); transition:opacity .5s ease,transform .5s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    #mobileMenu { display:none; }
+    #mobileMenu.open { display:block; }
+    .mobile-link { display:block; padding:11px 12px; border-radius:9px; font-size:13px; font-weight:650; color:#40534a; }
+    .mobile-link:hover { color:#087f5b; background:#effaf3; }
+    #backToTop { opacity:0; pointer-events:none; transform:translateY(6px); transition:.2s; }
+    #backToTop.show { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .footer-link { color:#d1e5d9; font-size:12px; font-weight:550; }
+    .footer-link:hover { color:white; }
+
+    /* Award Cards */
+    .award-card {
+      display: flex; flex-direction: column; gap: 16px; padding: 20px; 
+      background: #fff; border: 1px solid var(--line); border-radius: 18px;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+    .award-card:hover { border-color:#c4e8d3; box-shadow:0 12px 28px rgba(20,45,34,.06); transform:translateY(-3px); }
+    
+    /* Larger Image Grid in Awards */
+    .award-img-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .award-img-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid #e5e7eb; cursor: zoom-in; }
+    .award-img-grid .img-full { grid-column: span 2; height: 200px; }
+    
+    .award-img-single img { width: 100%; height: 260px; object-fit: cover; border-radius: 8px; border: 1px solid #e5e7eb; cursor: zoom-in; }
+
+    /* Certificate Cards */
+    .cert-card {
+      display: flex; flex-direction: column; padding: 24px; background: #fff; 
+      border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 3px 14px rgba(20,45,34,.025);
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+    .cert-card:hover { border-color:#c4e8d3; box-shadow:0 12px 28px rgba(20,45,34,.06); transform:translateY(-3px); }
+    .cert-icon { width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-bottom: 20px; }
+    
+    /* Media Modal (Image Viewer) */
+    #mediaModal { -webkit-user-select:none; user-select:none; }
+    #mediaModal .modal-img {
+      max-width:100%; max-height:calc(100vh - 120px); width:auto; height:auto;
+      border-radius: 8px; object-fit:contain; background:#fff;
+      pointer-events:none; -webkit-user-drag:none; user-drag:none;
+    }
+
+    /* Certificate List Modal */
+    #certListModal { -webkit-user-select:none; user-select:none; }
+
+    @media(max-width:900px) {
+      .hero-grid { gap:42px; grid-template-columns:minmax(0,1.1fr) minmax(260px,.8fr); }
+      .profile-frame img,.profile-fallback { height:360px; }
+    }
+    @media(max-width:767px) {
+      .container { width:calc(100% - 36px); }
+      .section { padding-block:65px; }
+      .section-head { margin-bottom:28px; }
+      .hero { padding:100px 0 60px; }
+      .hero-grid { grid-template-columns:1fr; gap:35px; }
+      .hero-title { font-size:clamp(42px,12vw,58px); }
+      .hero-copy,.section-copy { font-size:13px; line-height:1.9; }
+      .profile-frame { max-width:390px; width:100%; margin-inline:auto; }
+      .profile-frame img,.profile-fallback { height:350px; }
+      .card { padding:21px; }
+      .gallery-image { height:190px; }
+      .award-img-grid img { height: 120px; }
+      .award-img-grid .img-full { height: 160px; }
+      .award-img-single img { height: 220px; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar fixed top-0 inset-x-0 z-50">
+    <nav class="container" aria-label="Main navigation">
+      <div class="flex h-[72px] items-center justify-between gap-4">
+        <a href="#home" class="flex items-center gap-3 shrink-0" aria-label="Sovan Kapri home">
+          <img src="skk.png" alt="SK Logo" class="h-10 w-auto object-contain rounded-lg">
+          <span>
+            <span class="block text-sm font-extrabold tracking-[.08em] text-slate-900">SOVAN KAPRI</span>
+            <span class="block text-[10px] font-medium text-emerald-700">Trainer & Retail Expert</span>
+          </span>
+        </a>
+        <div class="hidden xl:flex items-center gap-5">
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#vision">Vision & Mission</a>
+          <a class="nav-link" href="#coaching">Coaching Career</a>
+          <a class="nav-link" href="#retail">Retail Career</a>
+          <a class="nav-link" href="#apps">Vibe Coding Apps</a>
+          <a class="nav-link" href="#gallery">Gallery</a>
+        </div>
+        <a href="#contact" class="button button-primary hidden lg:inline-flex">Contact Me <i class="fa-solid fa-arrow-right"></i></a>
+        <button id="menuToggle" class="lg:hidden flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+          <i id="menuIcon" class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+      <div id="mobileMenu" class="pb-4 lg:hidden">
+        <div class="rounded-xl border border-emerald-100 bg-white p-2 shadow-lg">
+          <a class="mobile-link" href="#about">About</a>
+          <a class="mobile-link" href="#vision">Vision & Mission</a>
+          <a class="mobile-link" href="#coaching">Coaching Career</a>
+          <a class="mobile-link" href="#retail">Retail Career</a>
+          <a class="mobile-link" href="#apps">Vibe Coding Apps</a>
+          <a class="mobile-link" href="#gallery">Gallery & Awards</a>
+          <a class="mobile-link" href="#video">Video Presentation</a>
+          <a class="mobile-link" href="#education">Education & Skills</a>
+          <a class="mobile-link" href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <span class="eyebrow"><span class="h-2 w-2 rounded-full bg-emerald-500"></span> Communication · Leadership · Innovation</span>
+          <p class="mt-6 text-sm font-semibold text-emerald-800">Hello, welcome to my professional portfolio.</p>
+          <h1 class="hero-title uppercase tracking-tight">SOVAN <span class="accent">KAPRI</span></h1>
+          <h2 class="hero-role">English Communication Trainer <span class="accent">&</span> Retail Management Specialist</h2>
+          <p class="hero-copy">I help learners communicate with confidence while bringing practical sales experience, customer service, team leadership and digital innovation together.</p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="tag"><i class="fa-solid fa-graduation-cap mr-1.5 text-emerald-700"></i> English Honours Graduate</span>
+            <span class="tag"><i class="fa-solid fa-chalkboard-user mr-1.5 text-emerald-700"></i> Trainer Since 2020</span>
+          </div>
+          <p class="mt-5 text-sm text-slate-600">Founder & Lead Trainer at
+            <a href="https://english-spur.github.io/Official-Website/" target="_blank" rel="noopener noreferrer" class="font-bold text-emerald-700 underline underline-offset-4 decoration-emerald-300">English Spur Online English Training Academy</a>
+          </p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a class="button button-primary" href="https://wa.me/919875340842" target="_blank" rel="noopener noreferrer" aria-label="Connect with Sovan Kapri on WhatsApp"><i class="fa-brands fa-whatsapp text-base"></i> Connect on WhatsApp</a>
+            
+            <!-- Direct Call Link -->
+            <a class="button button-outline" href="tel:919875340842" aria-label="Call Sovan Kapri"><i class="fa-solid fa-phone"></i> Call Now</a>
+            
+            <a class="button button-outline" href="https://english-spur.github.io/Official-Website/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit English Spur</a>
+            
+            <!-- Auto-Generating PDF Button -->
+            <button class="button button-outline" id="downloadProfilePdf" type="button">
+              <i class="fa-solid fa-file-pdf"></i> Download Profile PDF
+            </button>
+          </div>
+          <div class="mt-6 flex flex-wrap items-center gap-3 text-sm font-semibold" aria-label="Social media links">
+            <a class="inline-flex items-center gap-2 rounded-full border border-emerald-200 px-4 py-2 text-emerald-800 hover:bg-emerald-50 transition" href="https://www.facebook.com/ami.sovan.92/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i> Facebook Profile</a>
+            <a class="inline-flex items-center gap-2 rounded-full border border-emerald-200 px-4 py-2 text-emerald-800 hover:bg-emerald-50 transition" href="https://www.facebook.com/profile.php?id=100078171497466" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i> Facebook Page</a>
+            
+            <!-- YouTube Promotional Video Link -->
+            <a class="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-2 text-red-600 hover:bg-red-100 transition" href="https://www.youtube.com/watch?v=dPBi2J3AhPQ" target="_blank" rel="noopener noreferrer" aria-label="Watch promotional video on YouTube"><i class="fa-brands fa-youtube text-lg"></i> Watch Promo Video</a>
+            
+            <a class="social-link" href="mailto:sovankapri@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a class="social-link" href="tel:919875340842" aria-label="Call"><i class="fa-solid fa-phone"></i></a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="profile-frame">
+            <img id="profileImage" src="sk.png" alt="Portrait of Sovan Kapri" fetchpriority="high">
+            <div id="profileFallback" class="profile-fallback">
+              <i class="fa-solid fa-user-tie text-5xl mb-3"></i>
+              <strong class="text-xl uppercase tracking-wide">SOVAN KAPRI</strong>
+              <span class="mt-2 text-xs">Trainer & Retail Expert</span>
+            </div>
+          </div>
+          <div class="profile-note flex items-center gap-3">
+            <span class="icon-box"><i class="fa-solid fa-award"></i></span>
+            <span>
+              <span class="block text-sm font-bold text-slate-900">Recognised for performance</span>
+              <span class="block text-xs text-slate-500">Teaching, sales and professional service</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section bg-white">
+      <div class="container">
+        <div class="section-head reveal max-w-full">
+          <span class="eyebrow"><i class="fa-solid fa-user"></i> About Me</span>
+          <h2 class="section-title">Communication backed by <span class="accent">real-world experience.</span></h2>
+          <p class="section-copy">My professional journey brings together English language coaching, jewellery retail, customer relationship management and technology-assisted learning. I focus on practical skills that help people grow in confidence and perform better.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <article class="card reveal"><div class="icon-box"><i class="fa-solid fa-building-columns"></i></div><p class="stat-number mt-5">10+</p><h3 class="mt-2 text-sm font-bold">Training Institutes</h3><p class="mt-2 text-xs leading-6 text-slate-500">Experience across offline and online English training organisations.</p></article>
+          <article class="card reveal"><div class="icon-box"><i class="fa-solid fa-gem"></i></div><p class="stat-number mt-5">7+</p><h3 class="mt-2 text-sm font-bold">Retail Brands</h3><p class="mt-2 text-xs leading-6 text-slate-500">Jewellery sales, customer service and showroom operations.</p></article>
+          <article class="card reveal"><div class="icon-box"><i class="fa-solid fa-trophy"></i></div><p class="stat-number mt-5">Awards</p><h3 class="mt-2 text-sm font-bold">Performance Recognition</h3><p class="mt-2 text-xs leading-6 text-slate-500">Recognition for teaching, diamond sales and all-round performance.</p></article>
+          <article class="card reveal"><div class="icon-box"><i class="fa-solid fa-code"></i></div><p class="stat-number mt-5">Digital</p><h3 class="mt-2 text-sm font-bold">Vibe Coding & EdTech</h3><p class="mt-2 text-xs leading-6 text-slate-500">Exploring browser-based tools for learning and everyday use.</p></article>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-5 mt-5">
+          <article class="card reveal">
+            <h3 class="text-lg font-bold">My background</h3>
+            <p class="mt-3 text-sm leading-8 text-slate-600">An Honours Graduate in English (2022) from Netaji Subhas Open University, I combine academic learning with practical experience in communication training and retail leadership. My interests also include educational technology and learner-friendly digital resources.</p>
+            <a href="#education" class="inline-flex items-center gap-2 mt-4 text-xs font-bold text-emerald-700">Education & skills <i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="dark-panel p-7 sm:p-8 reveal">
+            <p class="text-xs font-bold uppercase tracking-widest text-emerald-200">Professional philosophy</p>
+            <h3 class="mt-4 text-2xl font-bold leading-snug">Knowledge matters when it creates confidence and positive outcomes.</h3>
+            <p class="mt-4 text-sm leading-8 text-emerald-50/80">Whether teaching English, supporting customers or building a digital tool, I value clarity, ethical conduct, practical outcomes and continuous improvement.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision and Mission -->
+    <section id="vision" class="section">
+      <div class="container">
+        <div class="section-head text-center mx-auto reveal max-w-full">
+          <span class="eyebrow"><i class="fa-solid fa-compass"></i> Purpose & Direction</span>
+          <h2 class="section-title text-3xl sm:text-4xl md:text-5xl">Driven by purpose. <span class="accent">Focused on people.</span></h2>
+          <p class="section-copy mx-auto">A commitment to accessible education, responsible leadership and meaningful professional development.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <article class="card reveal">
+            <div class="flex items-center gap-4"><div class="icon-box"><i class="fa-solid fa-eye"></i></div><div><p class="text-[10px] font-bold uppercase tracking-widest text-emerald-700">01 / Vision</p><h3 class="mt-1 text-lg font-bold">Communication Without Barriers</h3></div></div>
+            <p class="mt-5 text-sm leading-8 text-slate-600">To help learners from rural and urban communities overcome communication barriers and access better educational, personal and professional opportunities through confident English.</p>
+            <div class="mt-5 flex flex-wrap gap-2"><span class="tag">Accessible Learning</span><span class="tag">Confidence</span><span class="tag">Equal Opportunity</span></div>
+          </article>
+          <article class="card reveal">
+            <div class="flex items-center gap-4"><div class="icon-box"><i class="fa-solid fa-bullseye"></i></div><div><p class="text-[10px] font-bold uppercase tracking-widest text-emerald-700">02 / Mission</p><h3 class="mt-1 text-lg font-bold">Practical Skills for Real Life</h3></div></div>
+            <p class="mt-5 text-sm leading-8 text-slate-600">To combine interactive Listening, Speaking, Reading and Writing (LSRW) training with workplace communication, customer service, ethical retail practices and technology-assisted learning.</p>
+            <div class="mt-5 flex flex-wrap gap-2"><span class="tag">LSRW Coaching</span><span class="tag">Leadership</span><span class="tag">Retail Ethics</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Coaching career -->
+    <section id="coaching" class="section bg-white">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow"><i class="fa-solid fa-chalkboard-user"></i> Teaching Experience</span>
+          <h2 class="section-title">My English coaching <span class="accent">journey.</span></h2>
+          <p class="section-copy">Experience across computer institutes, skills centres, a primary school and online learning platforms, with an emphasis on practical communication.</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-5">
+          <div class="rounded-2xl border border-emerald-100 bg-emerald-50/50 p-6 sm:p-8 reveal">
+            <div class="flex items-center gap-3 mb-7"><div class="icon-box"><i class="fa-solid fa-school"></i></div><div><h3 class="text-lg font-bold">Offline Training</h3><p class="text-xs text-slate-500 mt-1">Institutes, centres and school</p></div></div>
+            <div class="timeline">
+              <article class="timeline-item"><h4 class="text-sm font-bold">Islampur Youth Computer Training Centre</h4><p class="mt-1 text-xs text-slate-500">Panpur, Islampur, Amta, Howrah</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">The IT Academy</h4><p class="mt-1 text-xs text-slate-500">Mugkalyan, Bagnan, Howrah</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Learning Academy</h4><p class="mt-1 text-xs text-slate-500">Nuntia, Bagnan and Shyampur, Howrah</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Rastriya Skills</h4><p class="mt-1 text-xs leading-6 text-slate-500">Bagnan, Amta, Mecheda, Shyampur, Bakshi, Ranihati and Balichak centres</p><span class="award-tag mt-3"><i class="fa-solid fa-award"></i> Best Teacher Award · 2023</span></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Diganta Computer</h4><p class="mt-1 text-xs text-slate-500">Shyampur and Gujarpur centres</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">CSC Academy</h4><p class="mt-1 text-xs text-slate-500">Mourigram, Howrah</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Bandhan Academy</h4><p class="mt-1 text-xs text-slate-500">Subshit, Bagnan, Howrah</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Kishalay Kindergarten Primary School</h4><p class="mt-1 text-xs text-slate-500">Bagnan, Howrah</p></article>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 reveal">
+            <div class="flex items-center gap-3 mb-7"><div class="icon-box"><i class="fa-solid fa-laptop"></i></div><div><h3 class="text-lg font-bold">Online Training</h3><p class="text-xs text-slate-500 mt-1">Digital learning environments</p></div></div>
+            <div class="timeline">
+              <article class="timeline-item">
+                <h4 class="text-sm font-bold">English Spur Online English Training Academy</h4>
+                <span class="inline-flex mt-2 rounded-lg bg-emerald-100 px-3 py-1.5 text-[10px] font-bold text-emerald-900">Founder & Lead Trainer · Since 2020</span>
+                <p class="mt-3 text-xs leading-7 text-slate-600">An online English learning initiative focused on grammar, vocabulary, reading, spoken English and practical communication.</p>
+                <a class="inline-flex items-center gap-2 mt-3 text-xs font-bold text-emerald-800" href="https://english-spur.github.io/Official-Website/" target="_blank" rel="noopener noreferrer">Visit official website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">DhI-e Foundation</h4><p class="mt-1 text-xs leading-6 text-slate-500">Spoken English training through an online learning organisation.</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Creator-Vidya</h4><p class="mt-1 text-xs leading-6 text-slate-500">Online skills training and learner development.</p></article>
+            </div>
+            <blockquote class="mt-8 rounded-xl bg-emerald-950 p-5 text-sm leading-7 text-emerald-50">“My approach is to make English learning clear, interactive and useful beyond the classroom.”<footer class="mt-3 text-xs font-bold text-emerald-300">— Sovan Kapri</footer></blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Retail career -->
+    <section id="retail" class="section">
+      <div class="container">
+        <div class="grid lg:grid-cols-[.82fr_1.18fr] gap-8 items-start">
+          <div class="reveal">
+            <span class="eyebrow"><i class="fa-solid fa-gem"></i> Retail Leadership</span>
+            <h2 class="section-title">A career built on <span class="accent">service and performance.</span></h2>
+            <p class="section-copy">My jewellery retail experience spans showroom sales, customer relationships, precious-metal and diamond product knowledge, team coordination and showroom operations.</p>
+            <div class="dark-panel mt-7 p-6">
+              <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-200">Sales Recognition · 2019</p>
+              <h3 class="mt-3 text-lg font-bold">Forevermark Diamond Sales</h3>
+              <p class="mt-2 text-sm leading-7 text-emerald-50/80">Best Sales Person Award at Senco Gold & Diamonds.</p>
+              <div class="mt-5 border-t border-white/10 pt-5">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-200">Overall Performance · 2020</p>
+                <h3 class="mt-3 text-lg font-bold">All-Rounder Award</h3>
+                <p class="mt-2 text-sm leading-7 text-emerald-50/80">Recognition received at Pritam Jewellers Pvt. Ltd.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card p-6 sm:p-8 reveal">
+            <div class="flex items-center justify-between gap-4 mb-7"><h3 class="text-lg font-bold">Professional Experience</h3><span class="tag">7 RETAIL BRANDS</span></div>
+            <div class="timeline">
+              <article class="timeline-item"><h4 class="text-sm font-bold">Senco Gold & Diamonds</h4><p class="mt-1 text-xs font-semibold text-emerald-700">SCSE & Diamond/Platinum Division In-charge</p><p class="mt-2 text-xs leading-6 text-slate-500">Luxury jewellery sales, customer service, diamond and platinum product presentation, and showroom responsibilities.</p><span class="award-tag mt-3"><i class="fa-solid fa-trophy"></i> Best Sales Person · Forevermark · 2019</span></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Pritam Jewellers Pvt. Ltd.</h4><p class="mt-1 text-xs font-semibold text-emerald-700">Development Officer · Head Office</p><p class="mt-2 text-xs leading-6 text-slate-500">Development and operational responsibilities within the jewellery business.</p><span class="award-tag mt-3"><i class="fa-solid fa-medal"></i> All-Rounder Award · 2020</span></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Asmit Jewellers Pvt. Ltd.</h4><p class="mt-1 text-xs font-semibold text-emerald-700">Showroom Manager</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">B. Sirkar Johuree</h4><p class="mt-1 text-xs font-semibold text-emerald-700">Assistant Showroom Manager</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">M.B. Sons (J)</h4><p class="mt-1 text-xs font-semibold text-emerald-700">Retail Sales Executive</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Ratnagiri</h4><p class="mt-1 text-xs font-semibold text-emerald-700">Retail Sales Executive</p></article>
+              <article class="timeline-item"><h4 class="text-sm font-bold">Dutta Guinea Palace</h4><p class="mt-1 text-xs font-semibold text-emerald-700">Retail Sales Executive</p></article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vibe coding apps -->
+    <section id="apps" class="section bg-white">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow"><i class="fa-solid fa-code"></i> DIGITAL INNOVATION</span>
+          <h2 class="section-title">Educational Web Apps. <span class="accent">Built with Vibe Coding.</span></h2>
+          <p class="section-copy">A collection of interactive, browser-based educational applications designed to make English learning engaging, practical, and accessible for everyone.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          
+          <!-- App 1: 1000 Daily Use Sentences -->
+          <article class="card flex flex-col reveal">
+            <div class="flex items-center justify-between">
+              <div class="icon-box bg-emerald-100 text-emerald-700"><i class="fa-solid fa-comments text-xl"></i></div>
+              <span class="tag">EDTECH</span>
+            </div>
+            <h3 class="mt-5 text-base font-bold">1000 Daily Use Sentences</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Master everyday English with 1000 essential sentences. Includes Bengali meaning and phonetic pronunciation to help you speak confidently.</p>
+            <div class="mt-4 flex flex-wrap gap-2"><span class="tag">HTML5</span><span class="tag">Tailwind</span><span class="tag">JavaScript</span><span class="tag">Vibe Coded</span></div>
+            <a href="https://english-spur.github.io/1000-daily-use-sentences/" target="_blank" rel="noopener noreferrer" class="button button-primary w-full mt-6 !pt-3 !pb-3"><i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Web App</a>
+          </article>
+
+          <!-- App 2: Listening & Dictation -->
+          <article class="card flex flex-col reveal">
+            <div class="flex items-center justify-between">
+              <div class="icon-box bg-blue-100 text-blue-700"><i class="fa-solid fa-headphones text-xl"></i></div>
+              <span class="tag">LISTENING</span>
+            </div>
+            <h3 class="mt-5 text-base font-bold">Professional Listening & Dictation</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Improve your listening skills with real-life audio dictation. Features 50 practice situations across daily, workplace, travel, and social topics.</p>
+            <div class="mt-4 flex flex-wrap gap-2"><span class="tag">HTML5</span><span class="tag">Tailwind</span><span class="tag">JavaScript</span><span class="tag">Vibe Coded</span></div>
+            <a href="https://english-spur.github.io/L-and-W/" target="_blank" rel="noopener noreferrer" class="button button-primary w-full mt-6 !pt-3 !pb-3"><i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Web App</a>
+          </article>
+
+          <!-- App 3: Word Puzzle -->
+          <article class="card flex flex-col reveal">
+            <div class="flex items-center justify-between">
+              <div class="icon-box bg-amber-100 text-amber-700"><i class="fa-solid fa-puzzle-piece text-xl"></i></div>
+              <span class="tag">GAMING</span>
+            </div>
+            <h3 class="mt-5 text-base font-bold">Word Puzzle Game</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Learn English sentence structure through a fun, fast-paced puzzle game. Choose from 6 levels and beat the timer to build sentences!</p>
+            <div class="mt-4 flex flex-wrap gap-2"><span class="tag">HTML5</span><span class="tag">Tailwind</span><span class="tag">JavaScript</span><span class="tag">Vibe Coded</span></div>
+            <a href="https://english-spur.github.io/Word-Puzzle/" target="_blank" rel="noopener noreferrer" class="button button-primary w-full mt-6 !pt-3 !pb-3"><i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Web App</a>
+          </article>
+
+          <!-- App 4: Word Safari -->
+          <article class="card flex flex-col reveal">
+            <div class="flex items-center justify-between">
+              <div class="icon-box bg-purple-100 text-purple-700"><i class="fa-solid fa-book-open text-xl"></i></div>
+              <span class="tag">VOCABULARY</span>
+            </div>
+            <h3 class="mt-5 text-base font-bold">Word Safari</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Learn vocabulary through exciting stories! Explore 20 new words per chapter, play fun games, and read immersive tales from space to mythology.</p>
+            <div class="mt-4 flex flex-wrap gap-2"><span class="tag">HTML5</span><span class="tag">Tailwind</span><span class="tag">JavaScript</span><span class="tag">Vibe Coded</span></div>
+            <a href="https://english-spur.github.io/Word-Safari/" target="_blank" rel="noopener noreferrer" class="button button-primary w-full mt-6 !pt-3 !pb-3"><i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Web App</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Education and skills -->
+    <section id="education" class="section">
+      <div class="container">
+        <div class="section-head text-center mx-auto reveal">
+          <span class="eyebrow"><i class="fa-solid fa-graduation-cap"></i> Education & Expertise</span>
+          <h2 class="section-title">Knowledge with a <span class="accent">practical edge.</span></h2>
+          <p class="section-copy mx-auto">Language, teaching, business experience and technology inform my approach to professional growth.</p>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-4">
+          
+          <!-- 5-CLICK TRIGGER TARGET -->
+          <article class="card lg:col-span-2 reveal relative" id="secretTrigger" title="Click 5 times to view certificates">
+            <div class="icon-box"><i class="fa-solid fa-user-graduate"></i></div>
+            <p class="mt-5 text-[10px] font-bold uppercase tracking-widest text-emerald-700">Academic Qualification</p>
+            <h3 class="mt-3 text-xl font-bold leading-snug">Honours Graduate in English</h3>
+            <p class="mt-3 text-sm font-bold text-slate-700">2022</p>
+            <p class="mt-1 text-sm text-slate-600">Netaji Subhas Open University (NSOU)</p>
+            <p class="mt-5 rounded-xl bg-emerald-50 p-4 text-xs leading-7 text-emerald-900">Academic learning complemented by hands-on experience in English coaching and jewellery retail.</p>
+            
+            <!-- Invisible click area for the 5-click secret -->
+            <div class="absolute bottom-0 right-0 w-16 h-16 cursor-default"></div>
+          </article>
+          
+          <article class="card lg:col-span-3 reveal">
+            <div class="flex items-center gap-3"><div class="icon-box"><i class="fa-solid fa-bolt"></i></div><h3 class="text-lg font-bold">Core Strengths & Skills</h3></div>
+            <div class="mt-6 flex flex-wrap gap-2.5">
+              <span class="skill-chip"><i class="fa-solid fa-comments"></i> English Communication</span>
+              <span class="skill-chip"><i class="fa-solid fa-book-open"></i> Pedagogy & LSRW</span>
+              <span class="skill-chip"><i class="fa-solid fa-laptop"></i> Computer Skills</span>
+              <span class="skill-chip"><i class="fa-solid fa-code"></i> Vibe Coding</span>
+              <span class="skill-chip"><i class="fa-solid fa-lightbulb"></i> Motivational Approach</span>
+              <span class="skill-chip"><i class="fa-solid fa-list-check"></i> Diligence</span>
+              <span class="skill-chip"><i class="fa-solid fa-handshake"></i> Friendly Mentoring</span>
+              <span class="skill-chip"><i class="fa-solid fa-hashtag"></i> Numerology Knowledge</span>
+              <span class="skill-chip"><i class="fa-solid fa-users"></i> Customer Relations</span>
+              <span class="skill-chip"><i class="fa-solid fa-gem"></i> Jewellery Retail</span>
+              <span class="skill-chip"><i class="fa-solid fa-people-group"></i> Team Coordination</span>
+              <span class="skill-chip"><i class="fa-solid fa-person-chalkboard"></i> Training & Facilitation</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verified Credentials Section -->
+    <section id="credentials" class="section bg-white">
+      <div class="container">
+        <div class="section-head text-center mx-auto reveal max-w-2xl">
+          <span class="eyebrow"><i class="fa-solid fa-certificate"></i> Verified Credentials</span>
+          <h2 class="section-title">Professional <span class="accent">Certifications.</span></h2>
+          <p class="section-copy mx-auto">A showcase of my academic and professional certifications. Click on any icon below to view the certificates in high resolution. Downloading is strictly prohibited.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Cert 1: NSOU -->
+          <article class="cert-card reveal">
+            <div class="cert-icon bg-emerald-100 text-emerald-700 cursor-pointer hover:opacity-80 transition" onclick="openMedia('nsou.png')" title="Click icon to view certificate"><i class="fa-solid fa-graduation-cap text-xl"></i></div>
+            <h3 class="text-lg font-bold text-slate-900">English Honours Degree</h3>
+            <p class="mt-2 text-xs text-slate-500 font-semibold uppercase tracking-wider">Academic Qualification</p>
+            <p class="mt-4 text-sm leading-7 text-slate-600 flex-grow">Completed a comprehensive 3-year Bachelor of Arts (Honours) program focusing on advanced English literature, linguistics, and communication skills.</p>
+            <div class="mt-6 border-t border-slate-100 pt-4 flex items-center justify-between">
+              <div>
+                <p class="text-xs font-bold text-slate-700">Netaji Subhas Open University</p>
+                <p class="text-[10px] text-slate-500">2022</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Cert 2: NPTEL -->
+          <article class="cert-card reveal">
+            <div class="cert-icon bg-amber-100 text-amber-700 cursor-pointer hover:opacity-80 transition" onclick="openMedia('nptel.png')" title="Click icon to view certificate"><i class="fa-solid fa-award text-xl"></i></div>
+            <h3 class="text-lg font-bold text-slate-900">Better Spoken English</h3>
+            <p class="mt-2 text-xs text-slate-500 font-semibold uppercase tracking-wider">Professional Certification</p>
+            <p class="mt-4 text-sm leading-7 text-slate-600 flex-grow">Successfully completed a 12-week rigorous course by IIT Madras, securing an Elite score of 85% in spoken English proficiency.</p>
+            <div class="mt-6 border-t border-slate-100 pt-4 flex items-center justify-between">
+              <div>
+                <p class="text-xs font-bold text-slate-700">NPTEL (IIT Madras)</p>
+                <p class="text-[10px] text-slate-500">2019</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Cert 3: World English Institute -->
+          <article class="cert-card reveal">
+            <div class="cert-icon bg-blue-100 text-blue-700 cursor-pointer hover:opacity-80 transition" onclick="openMedia('we.png')" title="Click icon to view certificate"><i class="fa-solid fa-language text-xl"></i></div>
+            <h3 class="text-lg font-bold text-slate-900">Advanced English Course</h3>
+            <p class="mt-2 text-xs text-slate-500 font-semibold uppercase tracking-wider">Language Proficiency</p>
+            <p class="mt-4 text-sm leading-7 text-slate-600 flex-grow">Completed an intensive one-year advanced English course designed to master fluency, comprehension, and high-level grammar.</p>
+            <div class="mt-6 border-t border-slate-100 pt-4 flex items-center justify-between">
+              <div>
+                <p class="text-xs font-bold text-slate-700">World English Institute</p>
+                <p class="text-[10px] text-slate-500">2021</p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery and awards -->
+    <section id="gallery" class="section bg-[#f7f9f8]">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow"><i class="fa-solid fa-images"></i> Professional Gallery</span>
+          <h2 class="section-title">Learning spaces & <span class="accent">recognition.</span></h2>
+          <p class="section-copy">A visual section for classroom learning, professional milestones and achievements across teaching and jewellery retail.</p>
+        </div>
+        
+        <!-- 10 Images for Gallery (c1.jpg to c10.jpg) -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" aria-label="Gallery media area">
+          
+          <article class="gallery-card reveal">
+            <img src="c1.jpg" alt="Professional Gallery Image 1" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+          
+          <article class="gallery-card reveal">
+            <img src="c2.jpg" alt="Professional Gallery Image 2" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+          
+          <article class="gallery-card reveal">
+            <img src="c3.jpg" alt="Professional Gallery Image 3" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+
+          <article class="gallery-card reveal">
+            <img src="c4.jpg" alt="Professional Gallery Image 4" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+
+          <article class="gallery-card reveal">
+            <img src="c5.jpg" alt="Professional Gallery Image 5" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+
+          <article class="gallery-card reveal">
+            <img src="c6.jpg" alt="Professional Gallery Image 6" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+
+          <article class="gallery-card reveal">
+            <img src="c7.jpg" alt="Professional Gallery Image 7" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+
+          <article class="gallery-card reveal">
+            <img src="c8.jpg" alt="Professional Gallery Image 8" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+
+          <article class="gallery-card reveal">
+            <img src="c9.jpg" alt="Professional Gallery Image 9" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+
+          <article class="gallery-card reveal">
+            <img src="c10.jpg" alt="Professional Gallery Image 10" class="gallery-image gallery-trigger" loading="lazy">
+          </article>
+
+        </div>
+
+        <!-- Awards & Achievements -->
+        <div class="mt-16 section-head reveal">
+          <span class="eyebrow"><i class="fa-solid fa-certificate"></i> Awards & Achievements</span>
+          <h3 class="section-title text-2xl sm:text-3xl">Milestones worth celebrating.</h3>
+          <p class="section-copy">Professional recognitions and achievements across teaching and jewellery retail.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Award 1: Best Teacher (bt1, bt2, bt3) -->
+          <article class="award-card reveal">
+            <div class="flex items-center justify-between">
+              <span class="icon-box"><i class="fa-solid fa-award"></i></span>
+              <span class="text-xs font-bold text-emerald-800">2023</span>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-emerald-700">Teaching Excellence</p>
+              <h4 class="mt-2 text-base font-bold">Best Teacher Award</h4>
+              <p class="mt-2 text-xs leading-6 text-slate-600">Recognition received at Rastriya Skills.</p>
+            </div>
+            <div class="award-img-grid">
+              <img src="bt1.png" alt="Best Teacher Award Photo 1" class="gallery-trigger">
+              <img src="bt2.png" alt="Best Teacher Award Photo 2" class="gallery-trigger">
+              <img src="bt3.png" alt="Best Teacher Award Photo 3" class="img-full gallery-trigger">
+            </div>
+            <p class="border-t border-emerald-100 pt-3 text-[10px] font-bold text-slate-500">RASTRIYA SKILLS · 2023</p>
+          </article>
+
+          <!-- Award 2: Best Sales Person (sg1, sg2, sg3) -->
+          <article class="award-card reveal">
+            <div class="flex items-center justify-between">
+              <span class="icon-box" style="background:#fff4d9;color:#956300"><i class="fa-solid fa-gem"></i></span>
+              <span class="text-xs font-bold text-amber-800">2019</span>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-amber-700">Sales Performance</p>
+              <h4 class="mt-2 text-base font-bold">Best Sales Person Award</h4>
+              <p class="mt-2 text-xs leading-6 text-slate-600">Recognition for Forevermark diamond sales at Senco Gold & Diamonds.</p>
+            </div>
+            <div class="award-img-grid">
+              <img src="sg1.jpg" alt="Senco Gold Award Photo 1" class="gallery-trigger">
+              <img src="sg2.jpg" alt="Senco Gold Award Photo 2" class="gallery-trigger">
+              <img src="sg3.jpg" alt="Senco Gold Award Photo 3" class="img-full gallery-trigger">
+            </div>
+            <p class="border-t border-amber-100 pt-3 text-[10px] font-bold text-slate-500">SENCO GOLD & DIAMONDS · 2019</p>
+          </article>
+
+          <!-- Award 3: All Rounder (pt1) -->
+          <article class="award-card reveal">
+            <div class="flex items-center justify-between">
+              <span class="icon-box" style="background:#f1eafe;color:#7042a6"><i class="fa-solid fa-medal"></i></span>
+              <span class="text-xs font-bold text-violet-800">2020</span>
+            </div>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-violet-700">Overall Contribution</p>
+              <h4 class="mt-2 text-base font-bold">All-Rounder Award</h4>
+              <p class="mt-2 text-xs leading-6 text-slate-600">Recognition received at Pritam Jewellers Pvt. Ltd.</p>
+            </div>
+            <div class="award-img-single">
+              <img src="pt1.png" alt="Pritam Jewellers Award Photo" class="gallery-trigger">
+            </div>
+            <p class="border-t border-violet-100 pt-3 text-[10px] font-bold text-slate-500">PRITAM JEWELLERS · 2020</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW VIDEO PRESENTATION SECTION -->
+    <section id="video" class="section bg-[#022c22] text-white">
+      <div class="container">
+        <div class="section-head text-center mx-auto reveal max-w-2xl">
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-emerald-200">
+            <i class="fa-brands fa-youtube text-red-500 text-sm"></i> YouTube Premiere
+          </span>
+          <h2 class="mt-4 text-3xl sm:text-4xl font-bold tracking-tight">Watch My <span class="text-emerald-400">Promotional Video</span></h2>
+          <p class="mt-4 text-sm leading-7 text-emerald-100/70">Get a glimpse of my journey, teaching approach, and the impact of English communication training.</p>
+        </div>
+        
+        <div class="reveal max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+          <div class="relative w-full" style="padding-top: 56.25%; /* 16:9 Aspect Ratio */">
+            <iframe 
+              class="absolute top-0 left-0 w-full h-full"
+              src="https://www.youtube.com/embed/dPBi2J3AhPQ" 
+              title="Sovan Kapri Promotional Video" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section dark-panel !rounded-none">
+      <div class="container grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-emerald-200"><i class="fa-solid fa-paper-plane"></i> Get in Touch</span>
+          <h2 class="mt-6 text-4xl sm:text-5xl font-bold tracking-tight leading-tight">Let's start a <span class="text-emerald-300">conversation.</span></h2>
+          <p class="mt-5 max-w-lg text-sm leading-8 text-emerald-50/75">Interested in English communication training, professional collaboration, retail expertise or digital learning? I would be happy to hear from you.</p>
+          <div class="mt-8 space-y-3">
+            
+            <!-- Direct Call Link (Contact Section) -->
+            <a href="tel:919875340842" class="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[.05] p-4 hover:bg-white/10 transition"><span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-emerald-300"><i class="fa-solid fa-phone"></i></span><span><span class="block text-[10px] font-semibold uppercase tracking-widest text-emerald-100/65">Call</span><span class="mt-1 block text-sm font-bold text-white">+91 9875340842</span></span><i class="fa-solid fa-phone ml-auto text-emerald-200/70"></i></a>
+            
+            <a href="https://wa.me/919875340842" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[.05] p-4 hover:bg-white/10 transition" aria-label="Connect with Sovan Kapri on WhatsApp"><span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-emerald-300"><i class="fa-brands fa-whatsapp"></i></span><span><span class="block text-[10px] font-semibold uppercase tracking-widest text-emerald-100/65">WhatsApp</span><span class="mt-1 block text-sm font-bold text-white">Message +91 9875340842</span></span><i class="fa-brands fa-whatsapp ml-auto text-emerald-200/70"></i></a>
+            <a href="mailto:sovankapri@gmail.com" class="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[.05] p-4 hover:bg-white/10 transition"><span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-emerald-300"><i class="fa-solid fa-envelope"></i></span><span class="min-w-0"><span class="block text-[10px] font-semibold uppercase tracking-widest text-emerald-100/65">Email</span><span class="mt-1 block break-all text-sm font-bold text-white">sovankapri@gmail.com</span></span><i class="fa-solid fa-arrow-up-right-from-square ml-auto text-emerald-200/70"></i></a>
+            <a href="https://english-spur.github.io/Official-Website/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 rounded-xl border border-white/10 bg-white/[.05] p-4 hover:bg-white/10 transition"><span class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-emerald-300"><i class="fa-solid fa-globe"></i></span><span><span class="block text-[10px] font-semibold uppercase tracking-widest text-emerald-100/65">Training Academy</span><span class="mt-1 block text-sm font-bold text-white">English Spur Official Website</span></span><i class="fa-solid fa-arrow-up-right-from-square ml-auto text-emerald-200/70"></i></a>
+          </div>
+          <div class="mt-6 flex flex-wrap items-center gap-3 text-sm font-semibold">
+            <a class="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-white hover:bg-white/10 transition" href="https://www.facebook.com/ami.sovan.92/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i> Facebook Profile</a>
+            <a class="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-white hover:bg-white/10 transition" href="https://www.facebook.com/profile.php?id=100078171497466" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i> Facebook Page</a>
+            
+            <!-- Red YouTube Link (Contact Section) -->
+            <a class="inline-flex items-center gap-2 rounded-full border border-red-500 bg-red-600 px-4 py-2 text-white hover:bg-red-700 transition" href="https://www.youtube.com/@SOVANKAPRI123" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel"><i class="fa-brands fa-youtube text-lg"></i> YouTube Channel</a>
+          </div>
+        </div>
+
+        <div class="rounded-2xl bg-white p-6 sm:p-8 text-slate-900 shadow-xl reveal">
+          <div class="flex items-center gap-3"><div class="icon-box"><i class="fa-solid fa-message"></i></div><div><h3 class="text-lg font-bold">Send an Enquiry</h3><p class="mt-1 text-xs text-slate-500">Prepare a message in your email application.</p></div></div>
+          <form id="contactForm" class="mt-6 space-y-4">
+            <div><label for="contactName" class="mb-2 block text-xs font-bold text-slate-700">Your Name</label><input class="form-input" id="contactName" name="name" type="text" autocomplete="name" maxlength="100" placeholder="Enter your full name" required></div>
+            <div><label for="contactEmail" class="mb-2 block text-xs font-bold text-slate-700">Your Email Address</label><input class="form-input" id="contactEmail" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required></div>
+            <div><label for="contactSubject" class="mb-2 block text-xs font-bold text-slate-700">Enquiry Type</label><select class="form-input" id="contactSubject" name="subject" required><option value="English Communication Training">English Communication Training</option><option value="Professional Collaboration">Professional Collaboration</option><option value="Retail Management">Retail Management</option><option value="Digital Learning and Web Apps">Digital Learning & Web Apps</option><option value="Other Enquiry">Other Enquiry</option></select></div>
+            <div><label for="contactMessage" class="mb-2 block text-xs font-bold text-slate-700">Your Message</label><textarea class="form-input resize-y" id="contactMessage" name="message" rows="4" maxlength="3000" placeholder="Tell me about your enquiry..." required></textarea></div>
+            <button type="submit" class="button button-primary w-full"><i class="fa-solid fa-envelope"></i> Prepare Email</button>
+            <p id="formStatus" class="text-xs leading-6 text-slate-500" role="status" aria-live="polite">This form opens your default email application. It does not send or store information on a server.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-[#011f19] text-white">
+    <div class="container py-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+        <a href="#home" class="flex items-center gap-3">
+          <img src="skk.png" alt="SK Logo" class="h-10 w-auto object-contain rounded-lg">
+          <span><span class="block text-sm font-bold uppercase tracking-wide">SOVAN KAPRI</span><span class="block mt-1 text-[10px] text-emerald-100/65">Trainer · Retail Expert · Digital Creator</span></span>
+        </a>
+        <div class="flex flex-wrap gap-x-5 gap-y-3"><a class="footer-link" href="#about">About</a><a class="footer-link" href="#coaching">Coaching</a><a class="footer-link" href="#retail">Retail</a><a class="footer-link" href="#apps">Apps</a><a class="footer-link" href="#education">Skills</a><a class="footer-link" href="#contact">Contact</a></div>
+      </div>
+      <div class="mt-6 border-t border-white/10 pt-5 flex flex-col sm:flex-row sm:justify-between gap-2"><p class="text-[11px] text-emerald-100/60">© <span id="currentYear"></span> Sovan Kapri. All rights reserved.</p><a class="text-[11px] font-semibold text-emerald-300 hover:text-white" href="https://english-spur.github.io/Official-Website/" target="_blank" rel="noopener noreferrer">Founder of English Spur <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a></div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-800 text-white shadow-lg hover:bg-emerald-700" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- Image Fullscreen Viewer Modal -->
+  <div id="mediaModal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-slate-950/90 p-4 backdrop-blur-sm" role="dialog" aria-modal="true">
+    <div class="w-full max-w-5xl max-h-[95vh] flex flex-col rounded-2xl bg-black/50 shadow-2xl overflow-hidden relative">
+      <button id="closeMedia" class="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white hover:bg-black transition" aria-label="Close image viewer"><i class="fa-solid fa-xmark text-xl"></i></button>
+      <div class="flex-1 overflow-auto flex items-center justify-center p-2 sm:p-6">
+        <img id="mediaViewerImg" class="modal-img" alt="Fullscreen preview" draggable="false" oncontextmenu="return false;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificate List Modal (Triggered by 5 Clicks) -->
+  <div id="certListModal" class="fixed inset-0 z-[120] hidden items-center justify-center bg-slate-950/95 p-4 backdrop-blur-md" role="dialog" aria-modal="true">
+    <div class="w-full max-w-2xl rounded-2xl bg-white shadow-2xl overflow-hidden relative p-8">
+      
+      <button id="closeCertList" class="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="text-center mb-6">
+        <div class="icon-box mx-auto bg-emerald-100 text-emerald-700 !w-16 !h-16 !rounded-full mb-4">
+          <i class="fa-solid fa-award text-2xl"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-slate-900">Verified Certifications</h3>
+        <p class="mt-2 text-sm text-slate-500">Select a certificate to view it in high resolution.</p>
+      </div>
+
+      <div class="space-y-3">
+        <button class="w-full flex items-center justify-between p-4 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 transition text-left" onclick="openMedia('nsou.png'); closeCertList();">
+          <div>
+            <h4 class="font-bold text-slate-900">English Honours Degree</h4>
+            <p class="text-xs text-slate-500">Netaji Subhas Open University (2022)</p>
+          </div>
+          <i class="fa-solid fa-arrow-right text-emerald-600"></i>
+        </button>
+        
+        <button class="w-full flex items-center justify-between p-4 rounded-xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50 transition text-left" onclick="openMedia('nptel.png'); closeCertList();">
+          <div>
+            <h4 class="font-bold text-slate-900">Better Spoken English</h4>
+            <p class="text-xs text-slate-500">NPTEL (IIT Madras) - Elite 85% (2019)</p>
+          </div>
+          <i class="fa-solid fa-arrow-right text-amber-600"></i>
+        </button>
+        
+        <button class="w-full flex items-center justify-between p-4 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50 transition text-left" onclick="openMedia('we.png'); closeCertList();">
+          <div>
+            <h4 class="font-bold text-slate-900">Advanced English Course</h4>
+            <p class="text-xs text-slate-500">World English Institute (2021)</p>
+          </div>
+          <i class="fa-solid fa-arrow-right text-blue-600"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      // Menu & Nav Logic
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuIcon = document.getElementById("menuIcon");
+
+      function setMenuOpen(open) {
+        mobileMenu.classList.toggle("open", open);
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+        menuIcon.className = open ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+      }
+
+      menuToggle.addEventListener("click", () => {
+        setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
+      });
+      mobileMenu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMenuOpen(false)));
+      document.addEventListener("click", event => {
+        if (mobileMenu.classList.contains("open") && !mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) setMenuOpen(false);
+      });
+
+      // Profile Image Logic
+      const profileImage = document.getElementById("profileImage");
+      profileImage.addEventListener("error", () => {
+        profileImage.style.display = "none";
+        document.getElementById("profileFallback").style.display = "flex";
+      });
+
+      // Reveal Animations
+      const revealElements = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: "0px 0px -20px 0px" });
+        revealElements.forEach(element => observer.observe(element));
+      } else {
+        revealElements.forEach(element => element.classList.add("visible"));
+      }
+
+      // Footer Year & Back to Top
+      document.getElementById("currentYear").textContent = new Date().getFullYear();
+      const backToTop = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => backToTop.classList.toggle("show", window.scrollY > 450), { passive: true });
+      backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+      // Escape Key Handling
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+          setMenuOpen(false);
+          closeMedia();
+          closeCertList();
+        }
+      });
+
+      // Contact Form
+      document.getElementById("contactForm").addEventListener("submit", event => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        if (!form.reportValidity()) return;
+
+        const name = document.getElementById("contactName").value.trim();
+        const email = document.getElementById("contactEmail").value.trim();
+        const subject = document.getElementById("contactSubject").value;
+        const message = document.getElementById("contactMessage").value.trim();
+        const body = ["Hello Sovan Kapri,", "", message, "", "Regards,", name, "Email: " + email].join("\n");
+        const mailto = "mailto:sovankapri@gmail.com?subject=" + encodeURIComponent("[Portfolio Enquiry] " + subject) + "&body=" + encodeURIComponent(body);
+        document.getElementById("formStatus").textContent = "Your email draft is being prepared. If your email app does not open, email sovankapri@gmail.com directly.";
+        window.location.href = mailto;
+      });
+
+      /* ==================== Image Viewer Modal ==================== */
+      const mediaModal = document.getElementById("mediaModal");
+      const mediaViewerImg = document.getElementById("mediaViewerImg");
+      const closeMediaBtn = document.getElementById("closeMedia");
+
+      window.openMedia = function(src) {
+        if (!src) return;
+        mediaViewerImg.src = src;
+        mediaModal.classList.remove("hidden");
+        mediaModal.classList.add("flex");
+        document.body.style.overflow = "hidden";
+        closeMediaBtn.focus();
+      }
+
+      function closeMedia() {
+        if (mediaModal.classList.contains("hidden")) return;
+        mediaModal.classList.add("hidden");
+        mediaModal.classList.remove("flex");
+        document.body.style.overflow = "";
+        mediaViewerImg.removeAttribute("src");
+      }
+
+      closeMediaBtn.addEventListener("click", closeMedia);
+      mediaModal.addEventListener("click", event => { if (event.target === mediaModal) closeMedia(); });
+
+      document.querySelectorAll(".gallery-trigger").forEach(img => {
+        img.addEventListener("click", () => {
+          openMedia(img.getAttribute("src"));
+        });
+      });
+
+      mediaModal.addEventListener("contextmenu", e => e.preventDefault());
+      mediaViewerImg.addEventListener("contextmenu", e => e.preventDefault());
+      mediaViewerImg.addEventListener("dragstart", e => e.preventDefault());
+      /* ==================== End Image Viewer ==================== */
+
+      /* ==================== Secret 5-Click Logic ==================== */
+      const secretTrigger = document.getElementById("secretTrigger");
+      const certListModal = document.getElementById("certListModal");
+      const closeCertListBtn = document.getElementById("closeCertList");
+      let clickCount = 0;
+      let clickTimeout = null;
+
+      secretTrigger.addEventListener("click", () => {
+        clickCount++;
+        
+        // Reset click count after 2 seconds of inactivity
+        clearTimeout(clickTimeout);
+        clickTimeout = setTimeout(() => { clickCount = 0; }, 2000);
+
+        if (clickCount >= 5) {
+          clickCount = 0; // Reset for next time
+          certListModal.classList.remove("hidden");
+          certListModal.classList.add("flex");
+          document.body.style.overflow = "hidden";
+        }
+      });
+
+      window.closeCertList = function() {
+        if (certListModal.classList.contains("hidden")) return;
+        certListModal.classList.add("hidden");
+        certListModal.classList.remove("flex");
+        document.body.style.overflow = "";
+      }
+
+      closeCertListBtn.addEventListener("click", closeCertList);
+      certListModal.addEventListener("click", e => { if (e.target === certListModal) closeCertList(); });
+      /* ==================== End Secret 5-Click Logic ==================== */
+
+      /* ==================== Automatic Multi-page PDF Generator ==================== */
+      document.getElementById('downloadProfilePdf').addEventListener('click', async function() {
+        if (!window.jspdf || !window.jspdf.jsPDF) {
+          alert('The PDF tool could not load. Please check your internet connection and try again.');
+          return;
+        }
+        const originalHTML = this.innerHTML;
+        this.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating PDF...';
+        this.disabled = true;
+
+        try {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+          const pageW = 210, margin = 18, contentW = pageW - margin * 2;
+          const green = [6, 78, 59], emerald = [5, 150, 105], gold = [244, 201, 93], darkText = [30, 41, 59];
+          let y = 20;
+
+          // Load Profile Picture (sk.png from profileImage)
+          const profileImgElement = document.getElementById('profileImage');
+          let profileImgData = null;
+          if (profileImgElement && profileImgElement.complete && profileImgElement.naturalWidth) {
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width = profileImgElement.naturalWidth; 
+              canvas.height = profileImgElement.naturalHeight;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(profileImgElement, 0, 0);
+              profileImgData = canvas.toDataURL('image/jpeg', 0.95);
+            } catch (e) { /* Ignore image CORS errors */ }
+          }
+
+          // Helper: Header with sk.png on the Right Side
+          function header(firstPage) {
+            const headerHeight = 54;
+            doc.setFillColor(...green); doc.rect(0, 0, pageW, headerHeight, 'F');
+            doc.setFillColor(...gold); doc.rect(margin, 14, 2.5, 26, 'F');
+            
+            doc.setTextColor(255, 255, 255); doc.setFont('helvetica', 'bold'); doc.setFontSize(23);
+            doc.text('SOVAN KAPRI', margin + 8, 23);
+            doc.setFont('helvetica', 'normal'); doc.setFontSize(9.5);
+            doc.text('ENGLISH COMMUNICATION TRAINER', margin + 8, 31);
+            doc.text('& RETAIL LEADERSHIP EXPERT', margin + 8, 37.5);
+            doc.setTextColor(220, 240, 231); doc.setFontSize(9);
+            doc.text('Professional Profile', margin + 8, 45);
+
+            // sk.png image displayed on the top right
+            if (firstPage && profileImgData) {
+              try {
+                const img = document.getElementById('profileImage');
+                const ratio = (img && img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight : 1;
+                const frameSize = 38;
+                const frameX = pageW - margin - frameSize;
+                const frameY = (headerHeight - frameSize) / 2;
+
+                doc.setFillColor(255, 255, 255);
+                doc.roundedRect(frameX, frameY, frameSize, frameSize, 3, 3, 'F');
+
+                let drawW = frameSize, drawH = frameSize;
+                if (ratio >= 1) { drawW = frameSize; drawH = frameSize / ratio; } 
+                else { drawH = frameSize; drawW = frameSize * ratio; }
+                
+                const drawX = frameX + (frameSize - drawW) / 2;
+                const drawY = frameY + (frameSize - drawH) / 2;
+
+                doc.addImage(profileImgData, 'JPEG', drawX, drawY, drawW, drawH);
+                doc.setDrawColor(...gold); doc.setLineWidth(0.8);
+                doc.roundedRect(frameX, frameY, frameSize, frameSize, 3, 3, 'S');
+              } catch (e) {}
+            }
+            y = 66; // Spacing after header
+          }
+
+          // Helper: Check space and add page
+          function ensureSpace(height) {
+            if (y + height > 275) {
+              doc.addPage();
+              doc.setFillColor(...green); doc.rect(0, 0, pageW, 16, 'F');
+              doc.setTextColor(255, 255, 255); doc.setFont('helvetica', 'bold'); doc.setFontSize(10.5);
+              doc.text('SOVAN KAPRI  |  PROFESSIONAL PROFILE', margin, 11);
+              y = 28;
+            }
+          }
+
+          // Helper: Section Title with increased font & spacing
+          function sectionTitle(title) {
+            ensureSpace(18);
+            doc.setFillColor(236, 253, 245); doc.roundedRect(margin, y - 6, contentW, 11, 2, 2, 'F');
+            doc.setTextColor(...green); doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
+            doc.text(title.toUpperCase(), margin + 4, y + 1.5); 
+            y += 14;
+          }
+
+          // Helper: Paragraph with increased font & line height
+          function addParagraph(text) {
+            doc.setTextColor(...darkText); doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5);
+            const lines = doc.splitTextToSize(text, contentW - 2);
+            ensureSpace(lines.length * 5.6 + 4);
+            doc.text(lines, margin + 2, y); 
+            y += lines.length * 5.6 + 4;
+          }
+
+          // Helper: List Item with increased font & line height
+          function addListItem(text) {
+            doc.setTextColor(...darkText); doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+            const lines = doc.splitTextToSize(text, contentW - 8);
+            ensureSpace(lines.length * 5.4 + 4);
+            doc.setFillColor(...emerald); doc.circle(margin + 2.5, y - 1.2, 0.9, 'F');
+            doc.text(lines, margin + 7, y); 
+            y += lines.length * 5.4 + 4;
+          }
+
+          // Start PDF Content
+          header(true);
+
+          // 1. Summary
+          sectionTitle('Profile Summary');
+          addParagraph('English Communication Trainer, Founder of English Spur Online English Training Academy, and Retail Leadership Specialist. Combines practical English coaching with jewellery retail, customer relationship management, sales performance, and technology-assisted learning.');
+          y += 4;
+
+          // 2. Contact Info
+          sectionTitle('Contact Information');
+          const contactText = 'Phone / WhatsApp: +91 9875340842   |   Email: sovankapri@gmail.com\nWebsite: https://english-spur.github.io/Official-Website/\nLocation: Howrah, West Bengal, India';
+          addParagraph(contactText);
+          y += 4;
+
+          // 3. Education
+          sectionTitle('Education & Qualifications');
+          addListItem('Bachelor of Arts (Honours) in English — Netaji Subhas Open University (NSOU), 2022');
+          addListItem('Advanced English Course — World English Institute, 2020 - 2021');
+          addListItem('Better Spoken English (Elite - 85%) — NPTEL (IIT Madras), 2019');
+          y += 4;
+
+          // 4. Professional Experience
+          sectionTitle('Professional Experience');
+          
+          doc.setTextColor(...green); doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+          ensureSpace(12); doc.text('Founder & Lead Trainer | English Spur (Since 2020)', margin + 2, y); y += 7;
+          addListItem('Designed and delivered interactive online courses focusing on grammar, vocabulary, reading, spoken English, and practical communication.');
+          addListItem('Developed educational web applications for interactive English learning.');
+
+          doc.setTextColor(...green); doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+          ensureSpace(12); doc.text('English Communication Trainer | Offline Institutes', margin + 2, y); y += 7;
+          addListItem('Rastriya Skills: Taught Spoken English across multiple centres. Awarded Best Teacher in 2023.');
+          addListItem('The IT Academy, Learning Academy, Islampur Youth Computer Training Centre, Diganta Computer, CSC Academy, Bandhan Academy, Kishalay Kindergarten Primary School.');
+
+          doc.setTextColor(...green); doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+          ensureSpace(12); doc.text('Retail Sales & Management Experience', margin + 2, y); y += 7;
+          addListItem('Senco Gold & Diamonds — SCSE & Diamond/Platinum Division In-charge (Awarded Best Sales Person, 2019)');
+          addListItem('Pritam Jewellers Pvt. Ltd. — Development Officer (Awarded All-Rounder Award, 2020)');
+          addListItem('Asmit Jewellers Pvt. Ltd. — Showroom Manager');
+          addListItem('B. Sirkar Johuree — Assistant Showroom Manager');
+          addListItem('M.B. Sons (J), Ratnagiri, Dutta Guinea Palace — Retail Sales Executive');
+          y += 4;
+
+          // 5. Awards & Recognition
+          ensureSpace(22);
+          sectionTitle('Awards & Recognition');
+          addListItem('Best Teacher Award — Rastriya Skills (2023)');
+          addListItem('All-Rounder Award — Pritam Jewellers Pvt. Ltd. (2020)');
+          addListItem('Best Sales Person Award — Forevermark, Senco Gold & Diamonds (2019)');
+          y += 4;
+
+          // 6. Digital Innovations (EdTech Apps)
+          sectionTitle('Digital Innovations (EdTech Apps)');
+          addListItem('1000 Daily Use Sentences: Master everyday English with Bengali meaning and pronunciation.');
+          addListItem('Professional Listening & Dictation: Audio dictation practice for real-life situations.');
+          addListItem('Word Puzzle Game: Interactive sentence-building game across 6 levels.');
+          addListItem('Word Safari: Vocabulary learning through immersive stories and games.');
+          y += 4;
+
+          // 7. Core Skills
+          sectionTitle('Core Strengths & Skills');
+          addParagraph('English Communication, Pedagogy & LSRW, Computer Skills, Vibe Coding, Motivational Approach, Diligence, Friendly Mentoring, Numerology Knowledge, Customer Relations, Jewellery Retail, Team Coordination, Training & Facilitation.');
+          y += 4;
+
+          // Page numbers & Footer
+          const pages = doc.getNumberOfPages();
+          for (let i = 1; i <= pages; i++) {
+            doc.setPage(i);
+            doc.setDrawColor(220, 232, 225); doc.line(margin, 285, pageW - margin, 285);
+            doc.setTextColor(100, 120, 110); doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
+            doc.text('SOVAN KAPRI  |  PROFESSIONAL PROFILE', margin, 291);
+            doc.text('Page ' + i + ' of ' + pages, pageW - margin, 291, { align: 'right' });
+          }
+
+          // Auto-download
+          doc.save('Sovan-Kapri-Professional-Profile.pdf');
+          
+        } catch (error) {
+          console.error('Profile PDF generation failed:', error);
+          alert('Sorry, the PDF could not be created just now. Please try again.');
+        } finally {
+          this.disabled = false;
+          this.innerHTML = originalHTML;
+        }
+      });
+      /* ==================== End PDF Generator ==================== */
+
+    })();
+  </script>
+</body>
+</html>
